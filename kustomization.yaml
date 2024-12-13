@@ -9,5 +9,5 @@ resources:
 configMapGenerator:
   - name: esphome-env
     literals:
-      - USERNAME=test
+      - USERNAME=admin
       - PASSWORD=ChangeMe
