@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: esphome
+  labels:
+    app: esphome
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: esphome
+  template:
+    metadata:
+      labels:
+        app: esphome
+    spec:
+      containers:
+        - name: esphome
+          image: ghcr.io/esphome/esphome
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: esphome-config
+              mountPath: /config
+            - name: localtime
+              mountPath: /etc/localtime
+              readOnly: true
+          envFrom:
+            - configMapRef:
+                name: esphome-env
+          securityContext:
+            privileged: true
+          ports:
+            - containerPort: 6052
+              hostPort: 6052
+              protocol: TCP
+      volumes:
+        - name: esphome-config
+          persistentVolumeClaim:
+            claimName: esphome-config-pvc
+        - name: localtime
+          hostPath:
+            path: /etc/localtime
+            type: File
