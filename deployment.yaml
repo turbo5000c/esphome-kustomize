@@ -33,6 +33,9 @@ spec:
             - containerPort: 6052
               hostPort: 6052
               protocol: TCP
+            - containerPort: 6053
+              hostPort: 6053
+              protocol: TCP
       volumes:
         - name: esphome-config
           persistentVolumeClaim:
