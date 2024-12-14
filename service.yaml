@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: esphome
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - name: web
       port: 6052
