@@ -5,8 +5,13 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 6052
+    - name: web
+      port: 6052
       targetPort: 6052
+      protocol: TCP
+    - name: api
+      port: 6053
+      targetPort: 6053  # ESPHome API port
       protocol: TCP
   selector:
     app: esphome
