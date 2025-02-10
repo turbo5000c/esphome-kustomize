@@ -1,4 +1,13 @@
-test3243434
-env:
-  test: test
-  test: 2
+name: Deploy
+
+on: push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Use Environment Variables
+        run: echo "The API key is ${{ vars.TEST_VAR }}"
